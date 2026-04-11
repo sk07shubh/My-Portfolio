@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Shubham — Portfolio</title>
+<title>Shubhbam Kashid — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -208,7 +208,7 @@ nav.scrolled{ padding:.9rem 5rem; background:rgba(0,0,0,.85); }
   margin-bottom:.8rem;opacity:0;
 }
 .hero-name{
-  font-size:clamp(3.5rem,7vw,6.5rem);
+  font-size:clamp(3.1rem,6.2vw,5.8rem);
   font-weight:900;line-height:.95;
   letter-spacing:-.04em; margin-bottom:1.2rem;
   opacity:0;
@@ -539,7 +539,7 @@ nav.scrolled{ padding:.9rem 5rem; background:rgba(0,0,0,.85); }
     radial-gradient(circle at 86% 74%, rgba(85,145,255,.08), transparent 26%),
     linear-gradient(180deg, rgba(7,14,26,.28), rgba(5,10,18,.12));
 }
-.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;align-items:stretch;}
 .proj-card{
   background:linear-gradient(180deg, rgba(8,14,25,.72), rgba(3,7,14,.88));border:1px solid var(--border2);
   border-radius:6px;overflow:hidden;
@@ -547,6 +547,43 @@ nav.scrolled{ padding:.9rem 5rem; background:rgba(0,0,0,.85); }
   transform-origin:center bottom;
   transition:border-color .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1),box-shadow .35s,background .35s;
   cursor:none;position:relative;
+}
+.proj-progress-wrap{
+  position:absolute;top:1rem;right:1rem;z-index:4;
+  display:flex;align-items:center;gap:.55rem;
+  padding:.55rem .68rem;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(5,12,24,.82);
+  box-shadow:0 12px 30px rgba(0,0,0,.24);
+  backdrop-filter:blur(12px);
+}
+.proj-progress-led{
+  width:.6rem;height:.6rem;border-radius:999px;flex-shrink:0;
+  background:var(--progress-color, #ff5a5a);
+  box-shadow:0 0 14px var(--progress-color, #ff5a5a);
+}
+.proj-card[data-state="in-progress"] .proj-progress-led{animation:progressBlink 1.2s ease-in-out infinite;}
+.proj-card[data-state="completed"] .proj-progress-led{animation:none;opacity:1;}
+.proj-progress-meta{display:flex;flex-direction:column;gap:.34rem;min-width:122px;}
+.proj-progress-text{
+  display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+  font-family:var(--m);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#dce8ff;
+}
+.proj-progress-value{color:#fff;font-size:.62rem;}
+.proj-progress-bar{
+  width:100%;height:6px;border-radius:999px;overflow:hidden;
+  background:rgba(255,255,255,.08);
+}
+.proj-progress-fill{
+  display:block;height:100%;width:calc(var(--progress, 0) * 1%);
+  border-radius:inherit;
+  background:linear-gradient(90deg, rgba(255,255,255,.18), var(--progress-color, #ff5a5a));
+  box-shadow:0 0 16px rgba(255,255,255,.08);
+}
+@keyframes progressBlink{
+  0%,100%{opacity:1;box-shadow:0 0 18px var(--progress-color, #ff5a5a);}
+  50%{opacity:.35;box-shadow:0 0 6px var(--progress-color, #ff5a5a);}
 }
 .proj-card::before{
   content:'';position:absolute;
@@ -587,12 +624,12 @@ nav.scrolled{ padding:.9rem 5rem; background:rgba(0,0,0,.85); }
 }
 .proj-card:hover .proj-thumb::after{opacity:1;}
 @keyframes scanLine{0%{top:-10%;}100%{top:110%;}}
-.proj-body{padding:1.8rem;position:relative;z-index:2;}
+.proj-body{padding:1.8rem;position:relative;z-index:2;display:flex;flex-direction:column;min-height:255px;}
 .proj-name{font-size:1.15rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.6rem;}
 .proj-desc{font-family:var(--m);font-size:.74rem;color:var(--grey);line-height:1.85;margin-bottom:1.4rem;}
 .proj-stack{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.4rem;}
 .proj-tag{font-family:var(--m);font-size:.62rem;padding:.25rem .7rem;border-radius:2px;background:var(--blue-soft);border:1px solid var(--border);color:var(--blue2);}
-.proj-links{display:flex;gap:.8rem;flex-wrap:wrap;}
+.proj-links{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:auto;}
 .proj-link{
   display:inline-flex;align-items:center;gap:.55rem;
   font-family:var(--m);font-size:.65rem;
@@ -618,6 +655,15 @@ nav.scrolled{ padding:.9rem 5rem; background:rgba(0,0,0,.85); }
 .proj-link.live-link:hover{
   color:#fff;
   box-shadow:0 14px 30px rgba(26,107,255,.24), 0 0 28px rgba(26,107,255,.18);
+}
+.proj-link.download-link{
+  color:#fff3d6;
+  background:linear-gradient(135deg, rgba(215,141,45,.9), rgba(165,102,20,.76));
+  border-color:rgba(255,196,107,.42);
+}
+.proj-link.download-link:hover{
+  color:#fff;
+  box-shadow:0 14px 30px rgba(215,141,45,.24), 0 0 28px rgba(215,141,45,.16);
 }
 
 /* ── CONTACT ── */
@@ -734,6 +780,8 @@ footer{
   .section-inner{padding:0 2rem;}
   .about-grid,.skills-grid{grid-template-columns:1fr;}
   .projects-grid{grid-template-columns:1fr;}
+  .proj-progress-wrap{top:.8rem;right:.8rem;padding:.5rem .6rem;}
+  .proj-progress-meta{min-width:110px;}
   .contact-grid{grid-template-columns:1fr;gap:3rem;}
   footer{flex-direction:column;gap:1rem;padding:2rem;text-align:center;}
 }
@@ -771,14 +819,14 @@ footer{
         Open to Opportunities
       </div>
       <p class="hero-greeting">// Hello, I'm</p>
-      <h1 class="hero-name"><span>Shubham</span></h1>
+      <h1 class="hero-name"><span>Shubham Kashid</span></h1>
       <div class="hero-role-wrap">
         <span id="typed"></span><span class="cursor-blink"></span>
       </div>
       <p class="hero-desc">
-        A passionate CS student from Pimpri, Maharashtra.<br/>
-        I build things with code, think in algorithms,<br/>
-        and obsess over clean interfaces.
+        Passionate problem solver with a strong foundation in data structures and algorithms,<br/>
+        consistently building efficient solutions and sharpening skills through<br/>
+        regular coding practice.
       </p>
       <div class="hero-cta">
         <div class="magnetic"><a href="#contact" class="btn btn-blue">Get in touch</a></div>
@@ -790,7 +838,7 @@ footer{
       <div class="avatar-box">
         <div class="avatar-inner">
           <div class="avatar-initial">S</div>
-          <div class="avatar-sub">CS Student · Developer</div>
+          <div class="avatar-sub">Computer Engineering Student · Developer</div>
         </div>
         <div class="avatar-corner ac-tl"></div>
         <div class="avatar-corner ac-tr"></div>
@@ -802,7 +850,7 @@ footer{
         </div>
         <div class="float-tag ft2">
           <span>⚡</span>
-          <span>C++ · React · Python</span>
+          <span>Python · C · C++</span>
         </div>
       </div>
     </div>
@@ -982,66 +1030,66 @@ footer{
 
       <div class="tl-item reveal">
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-year"><span class="tl-year-badge">2023 — Present</span></div>
+        <div class="tl-year"><span class="tl-year-badge">2025 — Present</span></div>
         <div class="tl-card">
-          <span class="tl-status status-current">● Currently Enrolled</span>
-          <div class="tl-degree">B.E. in Computer Engineering</div>
+          <span class="tl-status status-current">● Completed 1st Sem</span>
+          <div class="tl-degree">B.Tech in Computer Engineering</div>
           <div class="tl-school">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            Pimpri Chinchwad College of Engineering &amp; Research (or your college), Pune
+            Indira College Of Management, Pune
           </div>
           <p class="tl-desc">
-            Studying core computer science with focus on algorithms, data structures,
-            operating systems, computer networks, and software engineering. Actively
-            participating in technical fests and coding competitions.
+            Building a strong foundation in computer engineering through coursework,
+            problem-solving, and consistent coding practice, with growing focus on
+            data structures, algorithms, and practical software development.
           </p>
           <div class="tl-tags">
-            <span class="tl-tag">Algorithms</span><span class="tl-tag">OS</span>
-            <span class="tl-tag">Networks</span><span class="tl-tag">DBMS</span>
-            <span class="tl-tag">OOP</span><span class="tl-tag">Competitive Programming</span>
+            <span class="tl-tag">Data Structures</span><span class="tl-tag">Algorithms</span>
+            <span class="tl-tag">Programming</span><span class="tl-tag">Problem Solving</span>
+            <span class="tl-tag">Computer Engineering</span><span class="tl-tag">Completed 1st Sem</span>
           </div>
         </div>
       </div>
 
       <div class="tl-item reveal" style="transition-delay:.1s">
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-year"><span class="tl-year-badge">2021 — 2023</span></div>
+        <div class="tl-year"><span class="tl-year-badge">2023 — 2025</span></div>
         <div class="tl-card">
           <span class="tl-status status-completed">✓ Completed</span>
-          <div class="tl-degree">HSC — Science (PCM + CS)</div>
+          <div class="tl-degree">HSC — Science</div>
           <div class="tl-school">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            Your Junior College Name, Maharashtra
+            Kendriya Vidhyalaya, Belagavi Cannt, Karnataka
           </div>
           <p class="tl-desc">
-            Completed higher secondary education with Physics, Chemistry, Mathematics,
-            and Computer Science. First deep dive into programming and problem-solving,
-            building the foundation for engineering.
+            Completed higher secondary education in the science stream with a strong
+            academic foundation in Physics, Chemistry, and Mathematics, developing
+            analytical thinking and discipline that now support my engineering journey.
           </p>
           <div class="tl-tags">
-            <span class="tl-tag">Physics</span><span class="tl-tag">Mathematics</span>
-            <span class="tl-tag">Computer Science</span><span class="tl-tag">Maharashtra Board</span>
+            <span class="tl-tag">Physics</span><span class="tl-tag">Chemistry</span>
+            <span class="tl-tag">Mathematics</span><span class="tl-tag">CBSE</span>
           </div>
         </div>
       </div>
 
       <div class="tl-item reveal" style="transition-delay:.2s">
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-year"><span class="tl-year-badge">2021</span></div>
+        <div class="tl-year"><span class="tl-year-badge">2023</span></div>
         <div class="tl-card">
           <span class="tl-status status-completed">✓ Completed</span>
           <div class="tl-degree">SSC — Class X</div>
           <div class="tl-school">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            Your School Name, Pimpri, Maharashtra
+            Kendriya Vidhyalaya, Belagavi Cannt, Karnataka
           </div>
           <p class="tl-desc">
-            Completed secondary school education with distinction.
-            Discovered a strong interest in computers and logic during this period,
-            sparking the curiosity that led to a career in CS.
+            Completed secondary school education with a strong academic record,
+            building the discipline, curiosity, and learning mindset that continue
+            to shape my growth as an engineering student.
           </p>
           <div class="tl-tags">
-            <span class="tl-tag">Maharashtra Board</span><span class="tl-tag">Merit Student</span>
+            <span class="tl-tag">CBSE</span><span class="tl-tag">Academic Excellence</span>
           </div>
         </div>
       </div>
@@ -1059,20 +1107,22 @@ footer{
     </div>
     <div class="projects-grid">
 
-      <div class="proj-card reveal">
+      <div class="proj-card reveal" data-progress="95" data-state="in-progress">
         <div class="proj-thumb">
-          <div class="proj-thumb-text">PORT</div>
+          <div class="proj-thumb-text">FOOD</div>
           <div class="proj-thumb-line"></div>
         </div>
         <div class="proj-body">
-          <div class="proj-name">Portfolio Website</div>
+          <div class="proj-name">Food Machinery Marketplace</div>
           <p class="proj-desc">
-            A production-grade personal portfolio built with React, Vite, Tailwind CSS
-            and Framer Motion. Minimalist, high-end aesthetic with smooth animations.
+            A production-ready marketplace for commercial food machinery with product discovery,
+            category browsing, cart flows, and customer-facing shopping features, backed by
+            Supabase and polished toward launch-ready performance.
           </p>
           <div class="proj-stack">
-            <span class="proj-tag">React</span><span class="proj-tag">Vite</span>
-            <span class="proj-tag">Tailwind</span><span class="proj-tag">Framer Motion</span>
+            <span class="proj-tag">React</span><span class="proj-tag">TypeScript</span>
+            <span class="proj-tag">Vite</span><span class="proj-tag">Tailwind CSS</span>
+            <span class="proj-tag">Supabase</span>
           </div>
           <div class="proj-links">
             <a href="#" class="proj-link">Live ↗</a>
@@ -1081,19 +1131,22 @@ footer{
         </div>
       </div>
 
-      <div class="proj-card reveal" style="transition-delay:.1s">
+      <div class="proj-card reveal" style="transition-delay:.1s" data-progress="80" data-state="in-progress">
         <div class="proj-thumb">
-          <div class="proj-thumb-text">AI</div>
+          <div class="proj-thumb-text">LEET</div>
           <div class="proj-thumb-line"></div>
         </div>
         <div class="proj-body">
-          <div class="proj-name">CS50 AI Project</div>
+          <div class="proj-name">LeetSensei</div>
           <p class="proj-desc">
-            An AI-powered application built as part of CS50 curriculum. Integrated
-            OpenAI API for intelligent responses with a clean user interface.
+            A Google Chrome extension for DSA beginners that improves pattern recognition
+            by asking smart guiding questions, helping users think in the right direction
+            instead of jumping straight to solutions.
           </p>
           <div class="proj-stack">
-            <span class="proj-tag">Python</span><span class="proj-tag">OpenAI API</span><span class="proj-tag">CS50</span>
+            <span class="proj-tag">JavaScript</span><span class="proj-tag">HTML</span>
+            <span class="proj-tag">CSS</span><span class="proj-tag">Manifest V3</span>
+            <span class="proj-tag">Chrome Extension</span>
           </div>
           <div class="proj-links">
             <a href="https://github.com/" class="proj-link">Code ↗</a>
@@ -1101,20 +1154,20 @@ footer{
         </div>
       </div>
 
-      <div class="proj-card reveal" style="transition-delay:.05s">
+      <div class="proj-card reveal" style="transition-delay:.05s" data-progress="75" data-state="in-progress">
         <div class="proj-thumb">
-          <div class="proj-thumb-text">DSA</div>
+          <div class="proj-thumb-text">VSC</div>
           <div class="proj-thumb-line"></div>
         </div>
         <div class="proj-body">
-          <div class="proj-name">DSA Solutions Library</div>
+          <div class="proj-name">ErrBuddy VS Code Extension</div>
           <p class="proj-desc">
             A curated collection of competitive programming solutions in C++,
             covering arrays, strings, graphs, DP and more — built during Codeverse and beyond.
           </p>
           <div class="proj-stack">
-            <span class="proj-tag">C++</span><span class="proj-tag">Algorithms</span>
-            <span class="proj-tag">LeetCode</span><span class="proj-tag">Codeforces</span>
+            <span class="proj-tag">JavaScript</span><span class="proj-tag">VS Code API</span>
+            <span class="proj-tag">Node.js</span><span class="proj-tag">AI Workflow</span>
           </div>
           <div class="proj-links">
             <a href="https://github.com/" class="proj-link">Code ↗</a>
@@ -1162,7 +1215,7 @@ footer{
           Reach out through any of these channels.
         </p>
         <div class="social-links">
-          <a href="https://github.com/" target="_blank" class="social-link">
+          <a href="https://github.com/sk07shubh" target="_blank" rel="noopener noreferrer" class="social-link">
             <div class="social-icon icon-github">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
@@ -1170,11 +1223,11 @@ footer{
             </div>
             <div class="social-info">
               <div class="social-name">GitHub</div>
-              <div class="social-handle">github.com/shubham</div>
+              <div class="social-handle">github.com/sk07shubh</div>
             </div>
             <div class="social-arrow">→</div>
           </a>
-          <a href="https://linkedin.com/in/" target="_blank" class="social-link">
+          <a href="https://www.linkedin.com/in/shubham-kashid-5b787639a" target="_blank" rel="noopener noreferrer" class="social-link">
             <div class="social-icon icon-linkedin">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -1182,15 +1235,15 @@ footer{
             </div>
             <div class="social-info">
               <div class="social-name">LinkedIn</div>
-              <div class="social-handle">linkedin.com/in/shubham</div>
+              <div class="social-handle">linkedin.com/in/shubham-kashid-5b787639a</div>
             </div>
             <div class="social-arrow">→</div>
           </a>
-          <a href="mailto:shubham@example.com" class="social-link">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sk07shubh@gmail.com" target="_blank" rel="noopener noreferrer" class="social-link">
             <div class="social-icon icon-email">✉️</div>
             <div class="social-info">
               <div class="social-name">Email</div>
-              <div class="social-handle">shubham@example.com</div>
+              <div class="social-handle">sk07shubh@gmail.com</div>
             </div>
             <div class="social-arrow">→</div>
           </a>
@@ -1239,7 +1292,7 @@ footer{
 
 <!-- ═══════ FOOTER ═══════ -->
 <footer>
-  <div class="footer-left">© 2025 <span>Shubham</span> — All rights reserved.</div>
+  <div class="footer-left">© 2025 <span>Shubhbam Kashid</span> — All rights reserved.</div>
   <div class="footer-right">Built from scratch · Pimpri, MH 🇮🇳</div>
 </footer>
 
@@ -1500,16 +1553,78 @@ window.addEventListener('scroll', () => {
 });
 
 /* ── ENHANCE PROJECT ACTIONS ── */
-const liveIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h4"/></svg><span>Live</span>`;
-const githubIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.72-4.03-1.42-4.03-1.42-.54-1.38-1.33-1.75-1.33-1.75-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23A11.44 11.44 0 0 1 12 5.8c1.02 0 2.05.14 3.01.4 2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.69.8.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg><span>GitHub</span>`;
-document.querySelectorAll('.proj-links').forEach((wrap, index) => {
-  const existingLinks = Array.from(wrap.querySelectorAll('a'));
-  const liveHref = existingLinks.find(link => /live|collaborate/i.test(link.textContent))?.getAttribute('href') || (index === 3 ? '#contact' : '#');
-  const githubHref = existingLinks.find(link => /code|github/i.test(link.textContent))?.getAttribute('href') || 'https://github.com/';
-  wrap.innerHTML = `
-    <a href="${liveHref}" class="proj-link live-link">${liveIcon}</a>
-    <a href="${githubHref}" class="proj-link" target="_blank">${githubIcon}</a>
-  `;
+const liveIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h4"/></svg>`;
+const githubIcon = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.23c-3.34.72-4.03-1.42-4.03-1.42-.54-1.38-1.33-1.75-1.33-1.75-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23A11.44 11.44 0 0 1 12 5.8c1.02 0 2.05.14 3.01.4 2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.69.8.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>`;
+const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v11"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>`;
+const projects = [
+  {
+    thumb: 'FOOD',
+    name: 'Food Machinery Marketplace',
+    description: 'A production-ready marketplace for commercial food machinery with product discovery, category browsing, cart flows, and customer-facing shopping features, backed by Supabase and polished toward launch-ready performance.',
+    tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Supabase'],
+    progress: 95,
+    state: 'in-progress',
+    links: [
+      { href: 'https://newonetouch.shop', kind: 'live', label: 'Live' },
+      { href: 'https://github.com/sk07shubh/automation-genius-shop', kind: 'github', label: 'GitHub' }
+    ]
+  },
+  {
+    thumb: 'LEET',
+    name: 'Leet Sensei - A Chrome Extention',
+    description: 'A Google Chrome extension for DSA beginners that improves pattern recognition by asking smart guiding questions, helping users think in the right direction instead of jumping straight to solutions.',
+    tags: ['JavaScript', 'HTML', 'CSS', 'Manifest V3', 'Chrome Extension'],
+    progress: 80,
+    state: 'in-progress',
+    links: [
+      { href: 'https://github.com/sk07shubh/Leet-Sensei/archive/refs/heads/main.zip', kind: 'download', label: 'Download ZIP' },
+      { href: 'https://github.com/sk07shubh/Leet-Sensei', kind: 'github', label: 'GitHub' }
+    ]
+  },
+  {
+    thumb: 'VSC',
+    name: 'ErrBuddy - A VS Code Extention',
+    description: 'A Visual Studio Code extension that explains terminal errors in beginner-friendly language, pinpoints where the issue comes from, and is being built toward one-click fixes for a smoother debugging experience.',
+    tags: ['JavaScript', 'VS Code API', 'Node.js', 'AI Workflow'],
+    progress: 75,
+    state: 'in-progress',
+    links: [
+      { href: 'https://github.com/sk07shubh/Visual-Studio-Code-Extention/archive/refs/heads/main.zip', kind: 'download', label: 'Download ZIP' },
+      { href: 'https://github.com/sk07shubh/Visual-Studio-Code-Extention', kind: 'github', label: 'GitHub' }
+    ]
+  }
+];
+const iconMap = { live: liveIcon, github: githubIcon, download: downloadIcon };
+const projectCards = Array.from(document.querySelectorAll('.proj-card'));
+projectCards.slice(projects.length).forEach(card => card.remove());
+projectCards.slice(0, projects.length).forEach((card, index) => {
+  const project = projects[index];
+  if(!project) return;
+  card.dataset.progress = project.progress;
+  card.dataset.state = project.state;
+  card.style.setProperty('--progress', project.progress);
+  card.style.setProperty('--progress-color', `hsl(${Math.round(project.progress * 1.2)} 82% 56%)`);
+  card.querySelector('.proj-thumb-text').textContent = project.thumb;
+  card.querySelector('.proj-name').textContent = project.name;
+  card.querySelector('.proj-desc').textContent = project.description;
+  card.querySelector('.proj-stack').innerHTML = project.tags.map(tag => `<span class="proj-tag">${tag}</span>`).join('');
+  const existingProgress = card.querySelector('.proj-progress-wrap');
+  if(existingProgress) existingProgress.remove();
+  card.insertAdjacentHTML('afterbegin', `
+    <div class="proj-progress-wrap">
+      <span class="proj-progress-led"></span>
+      <div class="proj-progress-meta">
+        <div class="proj-progress-text">
+          <span class="proj-progress-state">${project.state === 'completed' ? 'Completed' : 'In Progress'}</span>
+          <strong class="proj-progress-value">${project.progress}%</strong>
+        </div>
+        <div class="proj-progress-bar"><span class="proj-progress-fill"></span></div>
+      </div>
+    </div>
+  `);
+  card.querySelector('.proj-links').innerHTML = project.links.map(link => `
+    <a href="${link.href}" class="proj-link${link.kind === 'live' ? ' live-link' : ''}${link.kind === 'download' ? ' download-link' : ''}" ${/^https?:\/\//i.test(link.href) ? 'target="_blank" rel="noopener noreferrer"' : ''} ${link.kind === 'download' ? 'download' : ''}>${iconMap[link.kind] || githubIcon}<span>${link.label}</span></a>
+  `).join('');
 });
 
 /* ── SECTION STAGGER ANIMATIONS ── */
