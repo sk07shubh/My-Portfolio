@@ -4,11 +4,11 @@ Personal portfolio website for Shubham Kashid.
 
 ## Files
 
-- `SK Port.html` — main portfolio page
+- `index.html` — main portfolio page
 
 ## Preview
 
-Open `SK Port.html` in a browser to view the site locally.
+Open `index.html` in a browser to view the site locally.
 
 ## Tech
 
